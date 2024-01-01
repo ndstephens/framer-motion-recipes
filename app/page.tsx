@@ -18,12 +18,12 @@ const links = [
 
 export default function HomePage() {
   return (
-    <div className="p-8">
+    <div className="from-slate-700 to-slate-900 min-h-screen bg-gradient-to-br p-8">
       <ul className="space-y-3">
         {links.map((link) => (
           <li key={link.path}>
-            <Link href={link.path}>
-              <a className="text-blue-600 underline">{link.label}</a>
+            <Link href={link.path} className="text-blue-300 underline">
+              {link.label}
             </Link>
           </li>
         ))}

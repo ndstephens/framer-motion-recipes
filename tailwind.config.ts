@@ -28,7 +28,7 @@ const config: Config = {
     },
   },
   plugins: [
-    require('@tailwind/forms'),
+    require('@tailwindcss/forms'),
     addTailwindColorVariables,
     plugin(function ({ addUtilities, addVariant }) {
       addVariant('hocusv', ['&:hover', '&:focus-visible']);
