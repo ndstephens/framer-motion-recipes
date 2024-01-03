@@ -1,7 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { EnvelopeIcon } from '@heroicons/react/24/outline';
+import { EnvelopeIcon, ArchiveBoxIcon } from '@heroicons/react/24/outline';
+import { AnimatePresence, motion } from 'framer-motion';
 
 let titles = [
   ["Apple's newest iPhone is here", 'Watch our July event'],
@@ -17,14 +18,26 @@ let titles = [
 
 export default function Email() {
   const [messages, setMessages] = useState([...Array(9).keys()]);
+  const [selectedMessages, setSelectedMessages] = useState<number[]>([]);
 
   function addMessage() {
     let newId = (messages.at(-1) || 0) + 1;
     setMessages((messages) => [...messages, newId]);
   }
 
-  function archiveMessage(mid: number) {
-    setMessages((messages) => messages.filter((id) => id !== mid));
+  function toggleMessage(mid: number) {
+    if (selectedMessages.includes(mid)) {
+      setSelectedMessages((messages) => messages.filter((id) => id !== mid));
+    } else {
+      setSelectedMessages((messages) => [...messages, mid]);
+    }
+  }
+
+  function archiveMessages() {
+    setMessages((messages) =>
+      messages.filter((id) => !selectedMessages.includes(id)),
+    );
+    setSelectedMessages([]);
   }
 
   return (
@@ -39,24 +52,63 @@ export default function Email() {
               >
                 <EnvelopeIcon className="h-5 w-5 " />
               </button>
+              <button
+                onClick={archiveMessages}
+                className="-mx-2 rounded px-2 py-1 text-slate-400 hover:text-slate-500 active:bg-slate-200"
+              >
+                <ArchiveBoxIcon className="h-5 w-5 " />
+              </button>
             </div>
           </div>
           <ul className="overflow-y-scroll px-3 pt-2">
-            {[...messages].reverse().map((mid) => (
-              <li key={mid} className="relative py-0.5">
-                <button
-                  onClick={() => archiveMessage(mid)}
-                  className="block w-full cursor-pointer truncate rounded px-3 py-3 text-left hover:bg-slate-200"
+            <AnimatePresence initial={false}>
+              {[...messages].reverse().map((mid) => (
+                <motion.li
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: 'auto' }}
+                  exit={{
+                    opacity: 0,
+                    height: 0,
+                    transition: {
+                      opacity: { duration: 0.15 },
+                      height: { duration: 0.25 },
+                    },
+                  }}
+                  transition={{ type: 'spring', bounce: 0.4, duration: 0.7 }}
+                  key={mid}
                 >
-                  <p className="truncate text-sm font-medium text-slate-500">
-                    {titles[mid % titles.length][0]}
-                  </p>
-                  <p className="truncate text-xs text-slate-400">
-                    {titles[mid % titles.length][1]}
-                  </p>
-                </button>
-              </li>
-            ))}
+                  <div className="py-0.5">
+                    <button
+                      onClick={() => toggleMessage(mid)}
+                      className={`${
+                        selectedMessages.includes(mid)
+                          ? 'bg-blue-500'
+                          : 'hover:bg-slate-200'
+                      } block w-full cursor-pointer truncate rounded px-3 py-3 text-left`}
+                    >
+                      <p
+                        className={`${
+                          selectedMessages.includes(mid)
+                            ? 'text-white'
+                            : 'text-slate-500'
+                        } truncate text-sm font-medium`}
+                      >
+                        {titles[mid % titles.length][0]}
+                      </p>
+                      <p
+                        className={`${
+                          selectedMessages.includes(mid)
+                            ? 'text-blue-200'
+                            : 'text-slate-400'
+                        } truncate text-xs`}
+                      >
+                        {titles[mid % titles.length][1]}
+                      </p>
+                    </button>
+                  </div>
+                </motion.li>
+              ))}
+            </AnimatePresence>
           </ul>
         </div>
         <div className="flex-1 overflow-y-scroll border-l px-8 py-8">
