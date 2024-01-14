@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 
 const links = [
   { path: '/1-multi-step-wizard', label: 'Lesson 1 - Multistep wizard' },
-  { path: '/2-email-client', label: 'Lesson 2 - Email client' },
+  { path: '/2-animated-list', label: 'Lesson 2 - Animated List' },
   { path: '/3-header-part-1', label: 'Lesson 3 - Fixed header: Part 1' },
   { path: '/4-header-part-2', label: 'Lesson 4 - Fixed header: Part 2' },
   { path: '/5-carousel-part-1', label: 'Lesson 5 - Carousel: Part 1' },
