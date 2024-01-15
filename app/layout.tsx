@@ -17,8 +17,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
-    <html lang="en">
-      <body className={`${sans.variable} font-sans antialiased`}>
+    <html lang="en" className="h-full">
+      <body className={`${sans.variable} h-full font-sans antialiased`}>
         {children}
       </body>
     </html>

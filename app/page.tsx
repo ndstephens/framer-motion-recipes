@@ -18,7 +18,7 @@ const links = [
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-700 to-slate-900 p-8">
+    <div className="h-full bg-gradient-to-br from-slate-700 to-slate-900 p-8">
       <ul className="space-y-3">
         {links.map((link) => (
           <li key={link.path}>
