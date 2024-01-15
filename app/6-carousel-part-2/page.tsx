@@ -4,7 +4,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 import { useState } from 'react';
 import { AnimatePresence, MotionConfig, motion } from 'framer-motion';
 import useKeypress from 'react-use-keypress';
-import { useMeasure } from '@uidotdev/usehooks';
+import useMeasure from 'react-use-measure';
 
 const images = [
   '/images/1.jpeg',
