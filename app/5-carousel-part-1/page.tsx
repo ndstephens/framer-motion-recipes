@@ -3,7 +3,6 @@
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 import { useState } from 'react';
 import { AnimatePresence, MotionConfig, motion } from 'framer-motion';
-import { exit } from 'process';
 
 let images = [
   '/images/1.jpeg',
