@@ -1,4 +1,4 @@
-'use-client';
+'use client';
 
 import { AnimatePresence, motion, MotionConfig } from 'framer-motion';
 import { FormEvent, ReactNode, useState } from 'react';
